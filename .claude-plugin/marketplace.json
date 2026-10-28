@@ -1,0 +1,15 @@
+{
+  "name": "web-agent-skills",
+  "description": "10 skills en español para crear, revisar y mejorar webs profesionales con Claude, sin que se note que las hizo una IA.",
+  "owner": {
+    "name": "Juan Pablo Acosta",
+    "url": "https://github.com/Juampii01"
+  },
+  "plugins": [
+    {
+      "name": "web",
+      "source": "./plugins/web",
+      "description": "Crear la web, conectarla a WhatsApp, analizar la competencia, ponerle nota, titular, SEO, velocidad, conversión, cambios y versiones de diseño."
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+<!-- ===== web-contacto: formulario + botón flotante a WhatsApp =====
+     1. Cambiá data-numero por el WhatsApp del negocio (solo dígitos, con código de país).
+     2. Ajustá los campos y la plantilla del mensaje (data-plantilla), con {nombre-del-campo}.
+     3. Opcional: data-correo con el endpoint de Formspree o Web3Forms para recibir copia por correo.
+-->
+<section class="contacto" id="contacto" aria-labelledby="contacto-titulo">
+  <h2 id="contacto-titulo">Escribinos</h2>
+  <p>Contanos qué necesitás y te respondemos por WhatsApp. También podés escribir directo al <span class="contacto__numero">+54 9 11 2345-6789</span>.</p>
+
+  <form class="contacto__form" novalidate
+        data-numero="5491123456789"
+        data-plantilla="Hola, soy {nombre}. Me interesa {servicio}. {mensaje}"
+        data-correo="">
+    <div class="contacto__campo">
+      <label for="c-nombre">Nombre</label>
+      <input id="c-nombre" name="nombre" autocomplete="name" required data-error="Falta tu nombre para saber cómo saludarte.">
+    </div>
+    <div class="contacto__campo">
+      <label for="c-servicio">Qué te interesa</label>
+      <select id="c-servicio" name="servicio" required data-error="Elegí qué te interesa.">
+        <option value="">Elegí una opción</option>
+        <option>Opción 1</option>
+        <option>Opción 2</option>
+      </select>
+    </div>
+    <div class="contacto__campo">
+      <label for="c-mensaje">Algo más (opcional)</label>
+      <textarea id="c-mensaje" name="mensaje" rows="3"></textarea>
+    </div>
+    <button type="submit">Escribinos por WhatsApp</button>
+    <p class="contacto__aviso" role="status"></p>
+  </form>
+</section>
+
+<a class="contacto__flotante" href="#contacto" aria-label="Escribinos por WhatsApp">
+  <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6c-2 0-4-.6-5.7-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7 0a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5.9-1.6.1-.2 0-.4 0-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4s-1.2 1.1-1.2 2.7 1.2 3.2 1.4 3.4 2.3 3.6 5.7 5c2.1.9 2.9 1 4 .8.6-.1 1.9-.8 2.2-1.6s.3-1.4.2-1.6-.3-.2-.6-.4z"/></svg>
+</a>
+
+<style>
+.contacto{display:grid;gap:24px;max-width:640px}
+.contacto__numero{user-select:all;font-variant-numeric:tabular-nums;white-space:nowrap}
+.contacto__form{display:grid;gap:20px}
+.contacto__campo{display:grid;gap:8px}
+.contacto__campo label{font-size:14px;opacity:.75}
+.contacto__campo input,.contacto__campo select,.contacto__campo textarea{font:inherit;color:inherit;background:transparent;border:0;border-bottom:1px solid currentColor;padding:10px 0;border-radius:0}
+.contacto__campo [aria-invalid="true"]{border-bottom-color:#c0392b}
+.contacto__form button{justify-self:start;padding:16px 28px;border:0;border-radius:2px;background:#1f7a4d;color:#fff;font:inherit;cursor:pointer}
+.contacto__aviso{font-size:14px;min-height:1.4em}
+.contacto__flotante{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:60;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:#1f7a4d;color:#fff;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+</style>
+
+<script>
+document.querySelectorAll('.contacto__form').forEach(form => {
+  const aviso = form.querySelector('.contacto__aviso');
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    // 1. validar: el primer campo que falta se marca y se explica
+    for (const campo of form.querySelectorAll('[required]')) {
+      const vacio = !campo.value.trim();
+      campo.setAttribute('aria-invalid', vacio);
+      if (vacio) { aviso.textContent = campo.dataset.error || 'Completá este campo.'; campo.focus(); return; }
+    }
+    // 2. armar el mensaje con la plantilla
+    const datos = Object.fromEntries(new FormData(form));
+    const texto = form.dataset.plantilla
+      .replace(/\{(\w+)\}/g, (_, k) => (datos[k] || '').trim())
+      .replace(/\s+/g, ' ').trim();
+    // 3. copia por correo, si está configurada (no frena el envío si falla)
+    if (form.dataset.correo) {
+      try { await fetch(form.dataset.correo, {method: 'POST', headers: {'Accept': 'application/json'}, body: new FormData(form)}); } catch (_) {}
+    }
+    // 4. abrir WhatsApp con el mensaje escrito
+    aviso.textContent = 'Abriendo WhatsApp con tu mensaje listo para enviar.';
+    location.href = `https://wa.me/${form.dataset.numero}?text=${encodeURIComponent(texto)}`;
+  });
+});
+</script>
+<!-- ===== fin web-contacto ===== -->

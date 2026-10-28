@@ -1,0 +1,81 @@
+{
+  "total": 100,
+  "categorias": [
+    {
+      "nombre": "Claridad",
+      "peso": 20,
+      "criterios": [
+        {"puntos": 8, "criterio": "El titular dice qué vende y para quién en menos de 3 segundos"},
+        {"puntos": 4, "criterio": "Hay un subtítulo con el diferencial concreto (dato, lugar, plazo, método)"},
+        {"puntos": 4, "criterio": "La foto o visual principal muestra el producto o servicio real"},
+        {"puntos": 4, "criterio": "El menú usa palabras del cliente, no internas"}
+      ]
+    },
+    {
+      "nombre": "Conversión",
+      "peso": 20,
+      "criterios": [
+        {"puntos": 6, "criterio": "Hay una acción principal clara y visible sin bajar (botón o WhatsApp)"},
+        {"puntos": 4, "criterio": "El texto de los botones dice qué pasa al tocarlos"},
+        {"puntos": 4, "criterio": "Contactar lleva 2 toques o menos"},
+        {"puntos": 3, "criterio": "Precios o 'desde' visibles, o explica cómo se cotiza"},
+        {"puntos": 3, "criterio": "Cada sección empuja hacia la acción principal (ninguna es relleno)"}
+      ]
+    },
+    {
+      "nombre": "Confianza",
+      "peso": 15,
+      "criterios": [
+        {"puntos": 5, "criterio": "Prueba real: reseñas con nombre, casos, fotos de trabajos propios"},
+        {"puntos": 4, "criterio": "Datos de contacto completos: dirección o zona, horario, número visible"},
+        {"puntos": 3, "criterio": "Quién está detrás: nombre, foto o equipo real"},
+        {"puntos": 3, "criterio": "Sin cifras ni testimonios que suenen inventados"}
+      ]
+    },
+    {
+      "nombre": "Diseño sin olor a IA",
+      "peso": 15,
+      "criterios": [
+        {"puntos": 15, "criterio": "Puntaje de scripts/revisar.py convertido a 15 puntos"}
+      ]
+    },
+    {
+      "nombre": "Celular",
+      "peso": 10,
+      "criterios": [
+        {"puntos": 4, "criterio": "La portada entra completa y se lee en 390 px de ancho"},
+        {"puntos": 3, "criterio": "Botones de al menos 44 px y separados"},
+        {"puntos": 3, "criterio": "Sin scroll horizontal ni elementos que se superponen"}
+      ]
+    },
+    {
+      "nombre": "Velocidad",
+      "peso": 8,
+      "criterios": [
+        {"puntos": 3, "criterio": "Imágenes en WebP o AVIF y del tamaño en que se muestran"},
+        {"puntos": 3, "criterio": "Imágenes de abajo con carga diferida (loading=lazy)"},
+        {"puntos": 2, "criterio": "Pocas fuentes y scripts; nada que bloquee la carga sin necesidad"}
+      ]
+    },
+    {
+      "nombre": "SEO básico",
+      "peso": 7,
+      "criterios": [
+        {"puntos": 2, "criterio": "Title único con rubro y ciudad"},
+        {"puntos": 2, "criterio": "Meta description que invita a hacer clic"},
+        {"puntos": 2, "criterio": "Un solo H1 y títulos en orden"},
+        {"puntos": 1, "criterio": "Datos estructurados del negocio (LocalBusiness u Organization)"}
+      ]
+    },
+    {
+      "nombre": "Accesibilidad",
+      "peso": 5,
+      "criterios": [
+        {"puntos": 2, "criterio": "Texto con contraste suficiente sobre su fondo"},
+        {"puntos": 1, "criterio": "Todas las imágenes con alt descriptivo"},
+        {"puntos": 1, "criterio": "Se puede navegar con teclado y se ve el foco"},
+        {"puntos": 1, "criterio": "Respeta 'reducir movimiento'"}
+      ]
+    }
+  ]
+}
